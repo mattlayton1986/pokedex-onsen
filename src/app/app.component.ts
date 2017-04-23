@@ -28,7 +28,10 @@ export class AppComponent {
     .then(pokemon => {
       pokemon = pokemon.map(p => {
         p.imageLoaded = false;
-        p.types = this.pokedexService.getPokemonTypes(p.id);
+        this.pokedexService.getPokemonTypes(p.id)
+        .then(types => {
+          p.types = types;
+        });
         return p;
       });
 

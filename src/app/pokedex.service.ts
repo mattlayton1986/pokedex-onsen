@@ -14,11 +14,6 @@ export class PokedexService {
   getPokemon(offset: number, limit: number): Promise<any> {
     return this.http.get(`${this.baseUrl}?offset=${offset}&limit=${limit}`)
     .toPromise()
-
-    /*
-     1) .json() => returns a promise that resolves with an object literal containing JSON data
-     2) .results => array of objects containing NamedAPIResource for requested endpoint
-     */
     .then(response => response.json().results)
     .then(items => items.map((item, idx) => {
       const id: number = idx + offset + 1;
